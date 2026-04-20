@@ -48,7 +48,7 @@ const server = http.createServer((req, res) => {
 
     }
 
-    const visibleHtml = `<div class="content-block" style="display: none; max-height: 0px; overflow: hidden;">`
+    const visibleHtml = `<div class="content-block" style="display: none; max-height: 0px; overflow: hidden;">
 
   <p>Hi [Recipient Name],</p>
 
