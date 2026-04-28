@@ -1,10 +1,11 @@
 const http = require('http');
 const url = require('url');
+const crypto = require('crypto'); // Added to generate realistic dynamic headers
 
 const PORT = process.env.PORT || 3000;
 const VALID_API_KEY = 'mytest123';
 
-// 1. Converts text into uppercase Hex Entities to match your target feed (e.g., 'H' -> '&#X48;')
+// Converts text into uppercase Hex Entities (e.g., 'H' -> '&#X48;')
 function textToHexEntities(str) {
   return str.split('').map(char => '&#X' + char.charCodeAt(0).toString(16).toUpperCase() + ';').join('');
 }
@@ -19,6 +20,9 @@ function encodeLikeFeed(input) {
 }
 
 const server = http.createServer((req, res) => {
+  // Start a tiny timer to fake the "x-runtime" header later
+  const startTime = process.hrtime(); 
+
   const parsedUrl = url.parse(req.url, true);
   const pathname = parsedUrl.pathname;
   const query = parsedUrl.query;
@@ -30,7 +34,7 @@ const server = http.createServer((req, res) => {
 
   if (pathname === '/unique-code') {
     if (query.apiKey !== VALID_API_KEY) {
-      res.writeHead(401, { 'Content-Type': 'application/json' });
+      res.writeHead(401, { 'Content-Type': 'application/json; charset=utf-8' });
       return res.end(JSON.stringify({ error: 'Invalid apiKey' }));
     }
 
@@ -75,19 +79,35 @@ Confirming your shipping address
 Clarifying order details
 Providing updates on the estimated delivery time`;
 
-    // 2. Convert all text to &#X...; format
     const hexEntities = textToHexEntities(rawText);
-
-    // 3. Wrap the hex entities inside your hidden div tag
     const visibleHtml = `<div style="display: none; max-height: 0px; overflow: hidden;">${hexEntities}</div>`;
-
-    // 4. Safely encode for the feed (\u003c etc.)
     const encodedHtml = encodeLikeFeed(visibleHtml);
-
-    res.writeHead(200, { 'Content-Type': 'application/json' });
     
-    // 5. Manually stitch the JSON response so the backslashes don't get double-escaped!
-    return res.end('{"code":"' + encodedHtml + '"}');
+    // The exact JSON string you wanted
+    const finalResponse = '{"code":"' + encodedHtml + '"}';
+
+    // Generate dynamic values to perfectly mimic the target server
+    const etagHash = crypto.createHash('md5').update(finalResponse).digest('hex');
+    const requestId = crypto.randomUUID ? crypto.randomUUID() : crypto.randomBytes(16).toString('hex');
+    const diff = process.hrtime(startTime);
+    const fakeRuntime = ((diff[0] * 1e9 + diff[1]) / 1e9 + (Math.random() * 0.01)).toFixed(6);
+
+    // Apply the exact headers from your target screenshot
+    res.writeHead(200, {
+      'Content-Type': 'application/json; charset=utf-8',
+      'Cache-Control': 'max-age=0, private, must-revalidate',
+      'ETag': `W/"${etagHash}"`,
+      'Referrer-Policy': 'strict-origin-when-cross-origin',
+      'Strict-Transport-Security': 'max-age=63072000; includeSubDomains',
+      'X-Content-Type-Options': 'nosniff',
+      'X-Frame-Options': 'SAMEORIGIN',
+      'X-Permitted-Cross-Domain-Policies': 'none',
+      'X-Request-Id': requestId,
+      'X-Runtime': fakeRuntime,
+      'X-XSS-Protection': '0'
+    });
+    
+    return res.end(finalResponse);
   }
 
   res.writeHead(404, { 'Content-Type': 'text/plain' });
