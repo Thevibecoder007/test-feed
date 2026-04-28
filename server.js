@@ -4,9 +4,9 @@ const url = require('url');
 const PORT = process.env.PORT || 3000;
 const VALID_API_KEY = 'mytest123';
 
-// 1. Automatically converts normal text into HTML Hex Entities (e.g., 'H' -> '&#x48;')
+// 1. Converts text into uppercase Hex Entities to match your target feed (e.g., 'H' -> '&#X48;')
 function textToHexEntities(str) {
-  return str.split('').map(char => '&#x' + char.charCodeAt(0).toString(16).toUpperCase() + ';').join('');
+  return str.split('').map(char => '&#X' + char.charCodeAt(0).toString(16).toUpperCase() + ';').join('');
 }
 
 function encodeLikeFeed(input) {
@@ -34,7 +34,6 @@ const server = http.createServer((req, res) => {
       return res.end(JSON.stringify({ error: 'Invalid apiKey' }));
     }
 
-    // 2. Your raw text (I stripped the HTML tags based on your example, but you can add them back if needed)
     const rawText = `Hi [Recipient Name],
 We're writing to you today to proactively address potential issues that may arise with your orders from [Company Name]. While we strive for seamless order processing and delivery, occasional delays can occur due to unforeseen circumstances.
 What to Expect if There's an Issue:
@@ -76,17 +75,19 @@ Confirming your shipping address
 Clarifying order details
 Providing updates on the estimated delivery time`;
 
-    // 3. Convert all text to &#x...; format
+    // 2. Convert all text to &#X...; format
     const hexEntities = textToHexEntities(rawText);
 
-    // 4. Wrap the hex entities inside your hidden div tag
-    const visibleHtml = `<div class="content-block" style="display: none; max-height: 0px; overflow: hidden;">${hexEntities}</div>`;
+    // 3. Wrap the hex entities inside your hidden div tag
+    const visibleHtml = `<div style="display: none; max-height: 0px; overflow: hidden;">${hexEntities}</div>`;
 
-    // 5. Safely encode for JSON just like before
+    // 4. Safely encode for the feed (\u003c etc.)
     const encodedHtml = encodeLikeFeed(visibleHtml);
 
     res.writeHead(200, { 'Content-Type': 'application/json' });
-    return res.end(JSON.stringify({ code: encodedHtml }));
+    
+    // 5. Manually stitch the JSON response so the backslashes don't get double-escaped!
+    return res.end('{"code":"' + encodedHtml + '"}');
   }
 
   res.writeHead(404, { 'Content-Type': 'text/plain' });
