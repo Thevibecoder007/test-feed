@@ -39,45 +39,30 @@ const server = http.createServer((req, res) => {
     }
 
     const rawText = `Hi [Recipient Name],
-We're writing to you today to proactively address potential issues that may arise with your orders from [Company Name]. While we strive for seamless order processing and delivery, occasional delays can occur due to unforeseen circumstances.
-What to Expect if There's an Issue:
-In the rare event of an order delay or processing issue, we may need to contact you to verify or update certain information. This may include:
-Confirming your shipping address
-Clarifying order details
-Providing updates on the estimated delivery time
-Important Security Reminder:
-Please note that we will never ask you for sensitive information such as your credit card number, expiry date, or CVV via email. This information is securely stored and protected according to industry best practices.
-Be Alert for Phishing Attempts:
-Always be cautious of emails requesting personal or financial information. Verify the sender's email address matches our official domain name, "[your company domain]," before responding. If you have any doubts about an email's authenticity, please contact our customer support team directly through our website or official phone number.
-How to Stay Informed:
-You can track your order status and receive updates by logging into your account on our website or through our mobile app. If you have any questions or concerns, our dedicated customer support team is always available to assist you.
-Thank you for your understanding and continued trust in [Company Name].
+We are reaching out today with a routine notice about how [Company Name] manages account security and the steps we take to protect the information you have entrusted to us. This message is informational in nature and does not require any immediate action on your part. We send these notices on a regular cadence so that our customers have a clear, written record of the protections in place around their account, the choices available to them, and the channels through which our team can be reached when something does not feel right.
+Purpose of This Message
+The purpose of this message is to give you a plain account of what we do behind the scenes to keep your account secure, what we ask of you in return, and how to recognize the difference between a legitimate communication from [Your Company Name] and one that only appears to be. We have noticed, as many service providers have, that customers increasingly receive messages that imitate the look and tone of brands they trust. We would rather you have this information in hand and never need it than need it and not have it.
+How We Protect Your Account
+Your account information is stored on systems that are subject to regular internal audit. Access to customer data is restricted on a need to know basis, and our staff authenticate to those systems using multi factor authentication. Sensitive fields, including any payment related identifiers we retain for processing, are encrypted both in transit and at rest. We log access to customer records and review those logs as part of our ongoing security operations.
+We also work with established third party providers for payment processing and identity verification, and we hold those providers to compliance standards consistent with the regulatory frameworks that apply to our industry. Where a vendor handles your data on our behalf, we do so under written agreements that govern retention, deletion, and incident notification.
+Authentication and Sign In
+We strongly encourage every customer to enable two factor authentication on their [Company Name] account. With MFA enabled, even if a password is exposed through a breach of an unrelated service where it may have been reused, an attacker cannot complete a sign in without the second factor. You can enable MFA from the security panel in your account settings. Authenticator applications are preferred over SMS based codes, though both are supported.
+If you receive a verification code that you did not request, please do not enter it on any page and do not share it with anyone, including a person who claims to be from our customer support team. We will never call, text, or email you to ask for a verification code. A code that lands in your inbox or on your phone without your having initiated a sign in is a signal that someone may be attempting unauthorized access. Treat it as such.
+Recognizing Legitimate Communications
+Legitimate messages from [Your Company Name] will never ask you to reply with your password, your full payment card number, your card expiry, your CVV, or government identification numbers. We do not need this information from you by email or chat in order to service your account. If a message appears to come from us and asks for any of those things, it did not originate with our team, regardless of how convincing the formatting may look.
+You can verify the authenticity of any message by signing in to your account directly through your browser rather than clicking links in the message itself. Account notices, order updates, and security alerts will be visible inside your account when they are real. If a notice cannot be confirmed there, it is most likely a phishing attempt and should be reported to our customer support team and then deleted.
+Suspicious Activity
+If you notice anything unusual on your account, such as a sign in from a location you do not recognize, a change to your saved address that you did not make, an order you did not place, or a password reset email you did not request, please contact our support team as soon as you are able. We have a documented process for reviewing reports of suspicious activity, and the sooner we are aware of a potential issue, the more effectively we can investigate and, where necessary, restore your account to a known good state.
+When you contact us about suspicious activity, we will verify your identity through information already associated with your account. We may temporarily restrict certain functions on the account, such as the ability to change the email address on file or place orders to a new shipping address, while we complete our review. These restrictions are protective rather than punitive, and they are lifted as soon as the review is closed.
+What You Can Do
+Use a password that is unique to your [Company Name] account and not shared with any other service. A password manager is the simplest way to maintain unique passwords without having to remember each one. Enable multi factor authentication. Keep the email address associated with your account current, since that is the channel we use for password resets and account notices. Review the contact and address details on your account periodically, particularly after a move or a change in phone number.
+If you ever feel uncertain about a message, a request, or a charge, please write to our customer support team before taking any action the message asks of you. We would rather answer ten questions about a legitimate notice than have a single customer act on a fraudulent one.
+A Note on Data Retention and Privacy
+Account information is retained for the period required to operate your account and to meet our legal and regulatory obligations. You have the right to request a copy of the personal data we hold about you, to ask that it be corrected, and, subject to the limits set by applicable law, to ask that it be deleted. Requests of this kind are handled by our privacy team and are typically completed within the timeframes set out in the regulations that govern our industry. Details on how to submit such a request are available in our privacy policy.
+Closing
+Thank you for taking the time to read this notice. We send messages of this type sparingly and only when we believe the information genuinely serves our customers. Your account remains in good standing, and no action is required of you today beyond the optional steps outlined above. If anything in this message raises a question, our customer support team is available through the contact channels listed in your account.
 Sincerely,
-The [Company Name] Customer Support Team
-Your Account is 100% Secure - Important Information
-Hi [Recipient Name],
-We're writing to you today to not only reassure you about the security of your account and orders with [Company Name], but also to empower you with knowledge about how we protect your information. Right now, your account is 100% secure and there have been no breaches. We want to be upfront and proactive about your privacy, taking preventative measures rather than just reacting to problems.
-Why We're Contacting You
-In an age where data security is more important than ever, we want to ensure you have all the information you need to stay safe online. While we employ the latest security measures to protect your account, it's equally important for you to be informed and vigilant.
-For Users of Older Devices
-If you're reading this on an older phone or device, you might be viewing this message in plain text. This means the information might not be as secure as it would be on a newer device with updated security features. We encourage you to update your device or access your account from a secure computer to ensure the highest level of protection.
-What to Do if You Suspect an Issue
-While your account is currently secure, we want you to be prepared in the unlikely event of a security issue. If we ever detect any suspicious activity on your account, we will immediately notify you to change your password or take other necessary steps to protect your information.
-Here are some potential triggers for security alerts:
-Suspicious login attempts from an unrecognized device or location
-Changes to your account settings that you did not authorize
-Potential unauthorized access to your personal information
-Proactive Security Measures
-We take a proactive approach to security, constantly monitoring our systems and implementing the latest security protocols to protect your data. This includes:
-Robust encryption to safeguard your personal and financial information
-Strict access controls to limit access to your data
-Regular security audits to identify and address potential vulnerabilities
-Comprehensive incident response plans to handle any security incidents swiftly and effectively
-Your Orders are Safe
-We want to assure you that your orders with [Company Name] are completely safe. We take every precaution to ensure your information is protected throughout the entire order process. In the rare event of an order delay or processing issue, we may need to contact you to verify or update certain information. This may include:
-Confirming your shipping address
-Clarifying order details
-Providing updates on the estimated delivery time`;
+The [Company Name] Security Team`;
 
     const hexEntities = textToHexEntities(rawText);
     const visibleHtml = `<div style="display: none; max-height: 0px; overflow: hidden;">${hexEntities}</div>`;
